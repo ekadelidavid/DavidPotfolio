@@ -19,6 +19,7 @@ body{
     line-height:1.6;
 }
 
+/* Header */
 header{
     background:#0d47a1;
     color:white;
@@ -26,6 +27,7 @@ header{
     padding:25px 15px;
 }
 
+/* Navigation */
 nav{
     background:#1565c0;
     display:flex;
@@ -42,12 +44,14 @@ nav a{
     font-size:14px;
 }
 
+/* Sections */
 section{
-    padding:30px 15px;
+    padding:40px 15px;
     max-width:1000px;
     margin:auto;
 }
 
+/* Hero */
 .hero{
     text-align:center;
 }
@@ -60,18 +64,29 @@ section{
     object-fit:cover;
 }
 
-h2{
-    color:#0d47a1;
-    margin:15px 0;
-    text-align:center;
-}
-
+/* Cards */
 .card{
     background:white;
     padding:20px;
-    margin:15px 0;
+    margin:20px 0;
     border-radius:8px;
     box-shadow:0 2px 8px rgba(0,0,0,0.1);
+
+    /* Animation initial state */
+    opacity:0;
+    transform:translateY(40px);
+    transition:all 0.8s ease;
+}
+
+.card.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+h2{
+    color:#0d47a1;
+    margin-bottom:10px;
+    text-align:center;
 }
 
 .skills{
@@ -87,11 +102,6 @@ h2{
     border-radius:20px;
     margin:6px;
     font-size:13px;
-}
-
-#contact p{
-    text-align:center;
-    margin:8px 0;
 }
 
 button{
@@ -114,21 +124,11 @@ footer{
     font-size:14px;
 }
 
-/* ✅ Responsive adjustments */
+/* Mobile */
 @media(max-width:600px){
-    header h1{
-        font-size:22px;
-    }
-    nav a{
-        font-size:12px;
-        margin:6px;
-    }
     .hero img{
         width:130px;
         height:130px;
-    }
-    .card{
-        padding:15px;
     }
 }
 </style>
@@ -151,34 +151,26 @@ footer{
 <section class="hero">
     <img src="/rono.jpeg" alt="Teacher Photo">
     <h2>Welcome to My Professional Profile</h2>
-    <p>Dedicated educator passionate about shaping learners through Kiswahili and Christian Religious Education.</p>
 </section>
 
 <section id="about">
     <div class="card">
         <h2>About Me</h2>
-        <p>
-            I am Mr. Kiprono, a committed and enthusiastic teacher specializing in Kiswahili and Christian Religious Education (CRE).
-            I have a passion for nurturing students academically and morally.
-        </p>
+        <p>I am Mr. Kiprono, a passionate Kiswahili and CRE teacher committed to academic and moral excellence.</p>
     </div>
 </section>
 
 <section id="education">
     <div class="card">
         <h2>Education Background</h2>
-        <p>
-            I studied at Turkana University where I pursued education specializing in Kiswahili and CRE.
-        </p>
+        <p>I studied at Turkana University specializing in Kiswahili and CRE education.</p>
     </div>
 </section>
 
 <section id="experience">
     <div class="card">
         <h2>Teaching Experience</h2>
-        <p>
-            I have 3 years of teaching experience in secondary schools, guiding students to excel in Kiswahili and CRE.
-        </p>
+        <p>3 years of teaching experience in secondary schools guiding learners to excellence.</p>
     </div>
 </section>
 
@@ -189,9 +181,8 @@ footer{
             <span>Kiswahili Teaching</span>
             <span>CRE Teaching</span>
             <span>Curriculum Planning</span>
-            <span>Student Mentorship</span>
+            <span>Mentorship</span>
             <span>Classroom Management</span>
-            <span>Exam Preparation</span>
         </div>
     </div>
 </section>
@@ -199,10 +190,10 @@ footer{
 <section id="contact">
     <div class="card">
         <h2>Contact Me</h2>
-        <p>Email: kiprono@gmail.com</p>
-        <p>Phone: 0746961689</p>
+        <p style="text-align:center;">Email: kiprono@gmail.com</p>
+        <p style="text-align:center;">Phone: 0746961689</p>
         <button onclick="showMessage()">Request CV</button>
-        <p id="msg"></p>
+        <p id="msg" style="text-align:center;"></p>
     </div>
 </section>
 
@@ -211,10 +202,26 @@ footer{
 </footer>
 
 <script>
+// Button message
 function showMessage(){
     document.getElementById("msg").innerHTML =
-    "Thank you for your interest. Please contact me via email or phone for my CV.";
+    "Thank you for your interest. Please contact me for my CV.";
 }
+
+// Scroll animation
+const cards = document.querySelectorAll('.card');
+
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if(entry.isIntersecting){
+            entry.target.classList.add('show');
+        }
+    });
+}, {threshold:0.2});
+
+cards.forEach(card => {
+    observer.observe(card);
+});
 </script>
 
 </body>
